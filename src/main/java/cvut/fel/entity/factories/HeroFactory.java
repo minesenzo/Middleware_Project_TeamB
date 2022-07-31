@@ -5,8 +5,21 @@ import cvut.fel.entity.Squad;
 
 import java.util.Random;
 
+/**
+ * Factory of Heroes
+ *
+ * @see Hero
+ */
 public class HeroFactory {
 
+    /**
+     * Creator of Hero
+     * @param Squad squad
+     * @return Hero
+     * 
+     * @see Hero
+     * @see Squad
+     */
     public Hero createHero(Squad squad) {
         Random random = new Random();
         return createHero("Random Dude", squad.getBelief(),
@@ -14,6 +27,19 @@ public class HeroFactory {
                 squad);
     }
 
+    /**
+     * Creator of Hero
+     * @param name String
+     * @param belief int
+     * @param power int
+     * @param will int
+     * @param magic int     
+     * @param Squad squad
+     * @return Hero
+     * 
+     * @see Hero
+     * @see Squad
+     */
     public Hero createHero(String name, int belief, int power, int will, int magic, Squad squad) {
         return new Hero(name + belief + power + will + magic, belief, power, will, magic, squad);
     }

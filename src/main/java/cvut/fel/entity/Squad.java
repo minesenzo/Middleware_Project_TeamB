@@ -20,26 +20,60 @@ import java.util.stream.Stream;
 @Getter
 public class Squad extends AbstractEntity{
 
+    /**
+     * Id of the squad
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idSquad;
 
+    /**
+     * Belief of the squad
+     * 
+     * @see Squad#Squad(int belief)
+     * @see Squad#Squad()
+     */
     @Column
     private final int belief;
 
+    /**
+     * Members of the squad
+     * 
+     * @see Squad#addMember(Hero hero)
+     * @see Squad#removeMember(Hero hero)
+     */
     @OneToMany(targetEntity=Hero.class, mappedBy = "squad")
     private Collection<Hero> member;
 
+    /**
+     * Id of the fight
+     * 
+     * @see Squad#setFight(Fight fight)
+     * @see Fight
+     */
     @ManyToOne
     @JoinColumn(name="idFight")
     private Fight fight;
 
+    /**
+     * Constructor of Squad.
+     * 
+     * @param belief Belief of squad
+     * 
+     * @see Squad
+     * @see Squad#belief
+     */
     public Squad(int belief) {
         this.belief = belief;
 
         member = new HashSet<>();
     }
 
+    /**
+     * Constructor of Squad.
+     * 
+     * @see Squad
+     */
     public Squad() {
         belief = 0;
     }
@@ -65,7 +99,8 @@ public class Squad extends AbstractEntity{
     }
 
     /**
-     *
+     * Getter of power
+     * 
      * @return sum of all Hero's power.
      */
     public int getPower(){
@@ -75,6 +110,7 @@ public class Squad extends AbstractEntity{
     }
 
     /**
+     * Getter of Hero's will
      *
      * @return sum of all Hero's will.
      */
@@ -85,6 +121,7 @@ public class Squad extends AbstractEntity{
     }
 
     /**
+     * Getter of Hero's magic
      *
      * @return sum of all Hero's magic.
      */
@@ -95,17 +132,35 @@ public class Squad extends AbstractEntity{
     }
 
     /**
+     * Getter of getPower, getWill and getMagic
      *
-     * @return sum of #getMagic + #getWill + #getPower
+     * @return sum of #getPower + #getWill + #getMagic
+     * @see Squad#getPower()
+     * @see Squad#getWill()
+     * @see Squad#getMagic()
      */
     public int getValue(){
         return getPower() + getWill() + getMagic();
     }
 
+    /**
+     * Setter of fight
+     *
+     * @param fight Fight
+     * @see Fight
+     */
     public void setFight(Fight fight){
         this.fight = fight;
     }
 
+    /**
+     * Object to String
+     *
+     * @return object stringify
+     * @see Squad#idSquad
+     * @see Squad#belief
+     * @see Squad#getValue()
+     */
     @Override
     public String toString() {
         return "Squad{" +

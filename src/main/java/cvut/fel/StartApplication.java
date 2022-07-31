@@ -15,24 +15,59 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Class StartApplication
+ */
 @SpringBootApplication
 public class  StartApplication implements CommandLineRunner {
 
+    /**
+     * Logger of Class
+     * 
+     * @see LoggerFactory
+     * @see Logger
+     * @see StartApplication
+     */
     private static final Logger log = LoggerFactory.getLogger(StartApplication.class);
 
+    /**
+     * Repository of Hero
+     * 
+     * @see HeroRepository
+     */
     @Autowired
     private HeroRepository heroRepository;
 
+    /**
+     * Repository of Squad
+     * 
+     * @see SquadRepository
+     */
     @Autowired
     private SquadRepository squadRepository;
 
+    /**
+     * Repository of Fight
+     * 
+     * @see FightRepository
+     */
     @Autowired
     private FightRepository fightRepository;
 
+    /**
+     * Main function
+     * 
+     * @param args String[]
+     */
     public static void main(String[] args) {
         SpringApplication.run(StartApplication.class, args);
     }
 
+    /**
+     * Run function
+     * 
+     * @param args String...
+     */
     @Override
     public void run(String... args) {
 

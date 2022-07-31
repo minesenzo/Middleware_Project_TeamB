@@ -5,6 +5,11 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * A Fight represent a fight between 2 Squad
+ *
+ * @see Squad
+ */
 @Entity
 @Table(name = "Fight")
 @NamedQueries({
@@ -13,13 +18,28 @@ import java.util.*;
 @Getter
 public class Fight extends AbstractEntity {
 
+    /**
+     * Id of the fight
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idFight;
 
+    /**
+     * List of Squads
+     * 
+     * @see Squad
+     */
     @OneToMany(targetEntity=Squad.class, mappedBy = "fight")
     private final Collection<Squad> fighters;
 
+    /**
+     * Constructor of Fight.
+     * 
+     * @param fighters List of Squad
+     * 
+     * @see Squad
+     */
     public Fight(Squad... fighters) {
         if(fighters.length != 2 || fighters[0].getBelief() == fighters[1].getBelief()) {
             throw new IllegalArgumentException("A fight must be between two squads of different belief. " +
@@ -30,10 +50,21 @@ public class Fight extends AbstractEntity {
         }
     }
 
+    /**
+     * Constructor of Fight.
+     * 
+     *  @see Fight
+     */
     public Fight() {
         fighters = new HashSet<>();
     }
 
+    /**
+     * Getter of squad winner of fight
+     * 
+     *  @return Squad winner
+     *  @see Squad
+     */
     public Squad getWinner() {
         Optional<Squad> optionalWinner = getFighters().stream()
                 .max(Comparator.comparingInt(Squad::getValue));
@@ -45,6 +76,13 @@ public class Fight extends AbstractEntity {
         }
     }
 
+    /**
+     * Object to String
+     *
+     * @return object stringify
+     * @see Fight#idFight
+     * @see Fight#fighters
+     */
     @Override
     public String toString() {
         return "Fight{" +
